@@ -1,212 +1,255 @@
-ReactNative Task App
-A mobile application built with React Native (Expo) demonstrating clean architecture, reusable components, Firebase authentication, and REST API integration.
+# 📱 ReactNative Task App
 
- App Features:
+A modern mobile application built with **React Native (Expo)** demonstrating clean architecture, reusable components, Firebase authentication, and REST API integration.
 
-Email & Password Authentication (Firebase)
-Google Sign-In (Firebase)
-Persistent Login Session
-Posts List from JSONPlaceholder API
-Post Detail Screen
-Like / Unlike Posts (persisted locally)
-Comment on Posts (stored locally)
-Offline-aware UI
-Pull to Refresh
-Error Handling & Loading States
+---
 
+## 🚀 Features
 
+* 🔐 Email & Password Authentication (Firebase)
+* 🔑 Google Sign-In (Firebase)
+* 💾 Persistent Login Session (Local Storage)
+* 📰 Posts List from JSONPlaceholder API
+* 📄 Post Detail Screen
+* ❤️ Like / Unlike Posts (stored locally)
+* 💬 Comment on Posts (stored locally)
+* 📡 Offline-aware UI
+* 🔄 Pull to Refresh
+* ⚠️ Error Handling & Loading States
 
+---
 
-Architecture:
-This project follows a Feature-Based Modular Architecture with strict separation of concerns.
-Layer Responsibilities
-LayerLocationResponsibilityUIfeatures/*/screens/Render only. No business logic.Componentssrc/components/Reusable UI elementsHooksfeatures/*/hooks/Business logic and stateServicesfeatures/*/services/API calls and Firebase callsStoresrc/store/Global state managementTypessrc/types/TypeScript interfacesThemesrc/theme/Colors, spacing, typography
-Data Flow
-Screen
-  → calls Hook
-    → Hook calls Service
-      → Service calls Firebase / Axios
-        → Result stored in Zustand Store
-          → Screen re-renders via store selector
+## 🧠 Architecture
 
-📁 Project Structure
+This project follows a **Feature-Based Modular Architecture** with strict separation of concerns.
+
+### 📌 Layer Responsibilities
+
+| Layer      | Location               | Responsibility                  |
+| ---------- | ---------------------- | ------------------------------- |
+| UI         | `features/*/screens/`  | Render only (no business logic) |
+| Components | `src/components/`      | Reusable UI                     |
+| Hooks      | `features/*/hooks/`    | Business logic                  |
+| Services   | `features/*/services/` | API & Firebase calls            |
+| Store      | `src/store/`           | Global state (Zustand)          |
+| Types      | `src/types/`           | TypeScript interfaces           |
+| Theme      | `src/theme/`           | Design system                   |
+
+---
+
+## 🔄 Data Flow
+
+```
+Screen → Hook → Service → API/Firebase → Store → UI Re-render
+```
+
+---
+
+## 📁 Project Structure
+
+```
 taskreactnative/
 │
-├── App.tsx                          # Entry point
-├── index.ts                         # Root component registration
-├── app.json                         # Expo config
-├── tsconfig.json                    # TypeScript config
+├── App.tsx
+├── index.ts
+├── app.json
+├── tsconfig.json
 ├── package.json
 │
 ├── assets/
-│   └── images/                      # App icons and splash screen
+│   └── images/
 │
 └── src/
-    │
     ├── features/
-    │   │
-    │   ├── auth/                     # Authentication feature
+    │   ├── auth/
     │   │   ├── screens/
-    │   │   │   ├── LoginScreen.tsx   # Login UI
-    │   │   │   └── RegisterScreen.tsx# Register UI
     │   │   ├── hooks/
-    │   │   │   └── useAuth.ts        # Auth business logic
     │   │   ├── services/
-    │   │   │   └── authService.ts    # Firebase auth calls
     │   │   └── components/
-    │   │       └── GoogleSignInButton.tsx
     │   │
-    │   └── posts/                    # Posts feature
+    │   └── posts/
     │       ├── screens/
-    │       │   ├── PostListScreen.tsx    # List of all posts
-    │       │   └── PostDetailScreen.tsx  # Single post + comments
     │       ├── hooks/
-    │       │   ├── usePosts.ts           # Fetch posts list
-    │       │   └── usePostDetail.ts      # Single post + like + comment
     │       ├── services/
-    │       │   └── postsService.ts       # Axios API calls
     │       └── components/
-    │           ├── PostCard.tsx          # Post list item
-    │           ├── LikeButton.tsx        # Like toggle button
-    │           └── CommentItem.tsx       # Single comment UI
     │
-    ├── components/                   # Shared reusable components
-    │   ├── Button.tsx                # Generic button
-    │   ├── Input.tsx                 # Generic text input
-    │   ├── Card.tsx                  # Generic card wrapper
-    │   ├── Loader.tsx                # Loading spinner
-    │   └── ErrorView.tsx             # Error state with retry
-    │
-    ├── navigation/                   # App navigation
-    │   ├── RootNavigator.tsx         # Auth vs Main decider
-    │   ├── AuthStack.tsx             # Login / Register flow
-    │   └── MainStack.tsx             # Posts list / detail flow
-    │
-    ├── services/                     # Global services
-    │   ├── firebase.ts               # Firebase initialization
-    │   └── api.ts                    # Axios instance + interceptors
-    │
-    ├── store/                        # Zustand global state
-    │   ├── authStore.ts              # User auth state
-    │   ├── likesStore.ts             # Liked posts (persisted)
-    │   └── commentsStore.ts          # Comments per post (persisted)
-    │
-    ├── hooks/                        # Shared custom hooks
-    │   ├── useFetch.ts               # Generic fetch hook
-    │   └── useNetworkState.ts        # Online/offline detection
-    │
-    ├── types/                        # TypeScript interfaces
-    │   ├── Post.ts                   # Post and Comment types
-    │   └── User.ts                   # AuthUser type
-    │
-    └── theme/                        # Design tokens
-        ├── colors.ts                 # Color palette
-        └── spacing.ts                # Spacing, font sizes, border radius
+    ├── components/
+    ├── navigation/
+    ├── services/
+    ├── store/
+    ├── hooks/
+    ├── types/
+    └── theme/
+```
 
-⚙️ Tech Stack
-TechnologyVersionPurposeReact Native0.81.xMobile frameworkExpo~54.0.0Development platformTypeScript~5.xType safetyFirebase^10.xAuthenticationAxios^1.xHTTP clientZustand^5.xState managementReact Query^5.xServer state & cachingAsyncStorage^2.xLocal persistenceReact Navigation^7.xScreen navigationNetInfo^11.xNetwork detectionGesture Handler~2.28.0Touch handlingSafe Area Context~5.6.0Safe area layout
+---
 
-🚀 Setup Instructions
-Prerequisites
-Make sure you have these installed on your laptop:
+## ⚙️ Tech Stack
 
-Node.js v18 or higher → https://nodejs.org
-npm v9 or higher (comes with Node.js)
-VS Code → https://code.visualstudio.com
-Expo Go app on your phone → Play Store / App Store
+| Technology       | Version | Purpose              |
+| ---------------- | ------- | -------------------- |
+| React Native     | 0.81.x  | Mobile framework     |
+| Expo             | 54      | Development platform |
+| TypeScript       | 5.x     | Type safety          |
+| Firebase         | ^10.x   | Authentication       |
+| Axios            | ^1.x    | API calls            |
+| Zustand          | ^5.x    | State management     |
+| React Query      | ^5.x    | Server state         |
+| AsyncStorage     | ^2.x    | Local storage        |
+| React Navigation | ^7.x    | Navigation           |
+| NetInfo          | ^11.x   | Network detection    |
 
-Step 1 — Clone or Download the Project
-bashgit clone https://github.com/rahmanabdur1/taskreactnative.git
+---
+
+## 🛠 Setup Instructions
+
+### ✅ Prerequisites
+
+* Node.js (v18+)
+* npm (v9+)
+* VS Code
+* Expo Go (Mobile App)
+
+---
+
+### 📥 Step 1 — Clone Project
+
+```bash
+git clone https://github.com/rahmanabdur1/taskreactnative.git
 cd taskreactnative
-Or if downloaded as ZIP:
-bashcd taskreactnative
-Step 2 — Install Dependencies
-bashnpm install --legacy-peer-deps
-Step 3 — Firebase Setup
+```
 
-Go to https://console.firebase.google.com
-Create a new project named ReactNativeTask
-Go to Authentication → Get Started → Sign-in method
-Enable Email/Password
-Enable Google
-Go to Project Settings → Your Apps → Web App
-Copy the config object
+---
 
-Step 4 — Add Firebase Config
-Open src/services/firebase.ts and replace with your config:
-typescriptconst firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
+### 📦 Step 2 — Install Dependencies
+
+```bash
+npm install --legacy-peer-deps
+```
+
+---
+
+### 🔥 Step 3 — Firebase Setup
+
+1. Go to Firebase Console
+2. Create project
+3. Enable:
+
+   * Email/Password
+   * Google Sign-In
+4. Copy config
+
+---
+
+### ⚙️ Step 4 — Add Firebase Config
+
+Update:
+
+```
+src/services/firebase.ts
+```
+
+```ts
+const firebaseConfig = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
 };
-Step 5 — Run the App
-bashnpx expo start --clear
-Step 6 — Open on Phone
+```
 
-Open Expo Go app on your phone
-Make sure phone and laptop are on same WiFi
-Scan the QR code shown in terminal
-App will open on your phone
+---
 
-If WiFi does not work:
-bashnpx expo start --tunnel
+### ▶️ Step 5 — Run App
 
-📱 Running on Android Emulator
-bashnpx expo start
+```bash
+npx expo start --clear
+```
 
-🧪 Reusable Components
-Button
-typescript<Button
-  label="Sign In"
-  onPress={handleLogin}
-  variant="primary"  // primary | secondary | outline
-  loading={isLoading}
-  disabled={false}
-/>
-Input
-typescript<Input
-  label="Email"
-  value={email}
-  onChangeText={setEmail}
-  placeholder="your@email.com"
-  keyboardType="email-address"
-  error={emailError}
-  secureTextEntry={false}
-/>
-Card
-typescript<Card onPress={() => navigate()}>
-  <Text>Content here</Text>
-</Card>
-Loader
-typescript<Loader size="large" />
-ErrorView
-typescript<ErrorView
-  message="Failed to load posts"
-  onRetry={refetch}
-/>
+---
 
-🪝 Custom Hooks
-useAuth
-typescriptconst { user, isLoading, error, login, register, logout } = useAuth();
-usePosts
-typescriptconst { posts, isLoading, error, refetch } = usePosts();
-usePostDetail
-typescriptconst { post, liked, toggleLike, comments, addComment } = usePostDetail(postId);
-useFetch (Generic)
-typescriptconst { data, isLoading, error, refetch } = useFetch<Post[]>(postsService.getAllPosts);
-useNetworkState
-typescriptconst { isConnected } = useNetworkState();
+### 📱 Step 6 — Open on Device
 
-⚠️ Common Mistakes Avoided
-Bad PracticeWhat We Did InsteadAPI calls inside componentsAll API calls in services/ onlyFirebase used directly in UIFirebase only in authService.tsRepeated logic across screensSingle reusable hooks used everywhereMessy single folderFeature-based modular structureNo TypeScript typesFull TypeScript interfaces in types/No error handlingError handled at service, hook, and UI level
+* Open **Expo Go**
+* Scan QR Code
 
-🧠 Evaluation Notes
-This project was built to demonstrate:
+👉 If network issue:
+
+```bash
+npx expo start --tunnel
+```
+
+---
+
+## 📱 Emulator
+
+```bash
+npx expo start
+```
+
+---
+
+## 🧩 Reusable Components
+
+### Button
+
+```tsx
+<Button label="Sign In" onPress={handleLogin} />
+```
+
+### Card
+
+```tsx
+<Card>Content</Card>
+```
+
+---
+
+## 🪝 Custom Hooks
+
+### useAuth
+
+```ts
+const { user, login, register, logout } = useAuth();
+```
+
+### usePosts
+
+```ts
+const { posts, refetch } = usePosts();
+```
+
+---
+
+## ⚠️ Best Practices Used
+
+| Bad Practice ❌ | Solution ✅      |
+| -------------- | --------------- |
+| API in UI      | Service layer   |
+| Firebase in UI | authService     |
+| Repeated logic | Reusable hooks  |
+| No structure   | Feature-based   |
+| No types       | Full TypeScript |
+
+---
+
+## 🧠 Evaluation Notes
+
+This project demonstrates:
+
+* Clean architecture
+* Scalable folder structure
+* Separation of concerns
+* Reusable components & hooks
+* Offline-first thinking
+
+---
+
+## 👨‍💻 Author
+
+**Abdur Rahman**
 
 
-
-👨‍💻 Developer
-Built as a technical assessment demonstrating React Native architecture skills.
